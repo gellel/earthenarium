@@ -41,6 +41,10 @@ class Cartography(object):
         return self.config.dpi
 
     @property
+    def EQUATOR(self):
+        return (self.MAX_NORTH - self.MAX_SOUTH)
+
+    @property
     def HEIGHT(self):
         return self.config.height
 
@@ -73,8 +77,19 @@ class Cartography(object):
         return self.config.west
 
     @property
+    def MERIDIAN(self):
+        return (self.MAX_WEST - self.MAX_EAST)
+
+    @property
     def WIDTH(self):
         return self.config.width
+
+    def latitude(self, y):
+        return (y * self.config.scale)
+
+    def longitude(self, x):
+        return (x * self.config.scale)
+
 
     def __init__(self, config=None): 
         try: 
@@ -95,4 +110,4 @@ if __name__ == "__main__":
     cartography = Cartography(
             config=configuration)
 
-    print(cartography.MILES_PER_PIXEL)
+    print(cartography.longitude(10))
