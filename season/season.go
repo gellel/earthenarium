@@ -1,11 +1,9 @@
 package season
 
-import "github.com/gellel/earthenarium/chronograph"
-
-type Autumn string
-type Spring string
-type Summer string
-type Winter string
+import (
+	"github.com/gellel/earthenarium/chronograph"
+	"github.com/gellel/earthenarium/hemisphere"
+)
 
 type Season struct {
 	Begins *chronograph.Time
@@ -14,7 +12,7 @@ type Season struct {
 	Spans  *chronograph.Span
 }
 
-func NewSeason(hemisphere string, begins, ends *chronograph.Time, spans *chronograph.Span) *Season {
+func NewSeason(hemisphere *hemisphere.Hemisphere, begins, ends *chronograph.Time, spans *chronograph.Span) *Season {
 	return &Season{
 		Begins: begins,
 		Ends:   ends,

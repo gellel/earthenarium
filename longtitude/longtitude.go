@@ -18,11 +18,11 @@ const (
 
 var (
 	// PrimeMeridian is the center-most point across the celestial bodies X axis.
-	PrimeMeridian = Maximum + Minimum
+	PrimeMeridian = (Maximum + Minimum)
 )
 
 var (
-	// Meridian is the base degree of distance across the celestial bodies x axis.
+	// Meridian is the base degree of distance across the celestial bodies X axis.
 	Meridian = 1
 	// Meridians is the sum of all Meridians across the celestial body.
 	Meridians = ((Maximum - Minimum) * float32(Meridian))
@@ -30,7 +30,7 @@ var (
 
 // Exists returns a boolean that identifies whether the positional float32 is supported longtitude.
 func Exists(longtitude float32) bool {
-	return longtitude >= Minimum && longtitude <= Maximum
+	return ((longtitude >= Minimum) && (longtitude <= Maximum))
 }
 
 // NewLongtitude creates a new Longtitude pointer from the argument float32.
