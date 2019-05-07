@@ -66,6 +66,19 @@ func (longtitude *Longtitude) From(l *Longtitude) *Longtitude {
 	return NewLongtitude(l.Value() - longtitude.Value())
 }
 
+// Hemisphere returns a string describing the celestial hemisphere the Longtitute value is situated.
+func (longtitude *Longtitude) Hemisphere() string {
+	east := longtitude.East()
+	if east == true {
+		return "Eastern"
+	}
+	west := longtitude.West()
+	if west == true {
+		return "Western"
+	}
+	return "Meridian"
+}
+
 // Meridian returns a boolean that identifies whether the Longtitude value is situated approximately near or at the prime-meridian.
 func (longtitude *Longtitude) Meridian() bool {
 	return (longtitude.Absolute() == 0)

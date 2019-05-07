@@ -41,5 +41,5 @@ func main() {
 
 	c := a.From(b)
 
-	fmt.Println(c.Value())
+	fmt.Println(c.Hemisphere())
 }
