@@ -2,22 +2,30 @@ package main
 
 import (
 	"fmt"
-	"time"
 
-	"github.com/gellel/earthenarium/chronograph"
+	"github.com/gellel/earthenarium/latitude"
 )
 
 func main() {
 
-	str := "2015-12-23T05:02:12Z"
+	/*str := "2015-12-23T05:02:12Z"
 	t := time.Now()
 
 	a := chronograph.NewTimeFromISO(str)
 	b := chronograph.NewTime(&t)
+	s := chronograph.NewSpan(a, b)
 
-	d := chronograph.NewSpan(a, b)
+	latlong := coordinate.NewCoordinate(81.13, 139.11)
 
-	fmt.Println(d.Days)
+	x := season.NewSeason(latlong, a, b, s)
+	//fmt.Println(a.Day.Number, a.Month.Number, a.Year)
 
-	fmt.Println(a.Month.Name)
+	fmt.Println(x)
+
+	fmt.Print(season.GetSeason(latlong, a))*/
+
+	lat := latitude.NewLatitude(-81)
+
+	fmt.Println(lat.Region(), lat.Antarctic())
+
 }

@@ -3,6 +3,8 @@ package longtitude
 import (
 	"fmt"
 	"math"
+
+	"github.com/gellel/earthenarium/hemisphere"
 )
 
 const (
@@ -70,18 +72,18 @@ func (longtitude *Longtitude) From(l *Longtitude) *Longtitude {
 func (longtitude *Longtitude) Hemisphere() string {
 	east := longtitude.East()
 	if east == true {
-		return "Eastern"
+		return hemisphere.Eastern
 	}
 	west := longtitude.West()
 	if west == true {
-		return "Western"
+		return hemisphere.Western
 	}
-	return "Meridian"
+	return hemisphere.Meridian
 }
 
 // Meridian returns a boolean that identifies whether the Longtitude value is situated approximately near or at the prime-meridian.
 func (longtitude *Longtitude) Meridian() bool {
-	return (longtitude.Absolute() == 0)
+	return (longtitude.Absolute() < 10)
 }
 
 // To returns a Longtitude expressing the distance between two Longtitude pointers, using the argument Latitude as the subtraction.

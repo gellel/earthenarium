@@ -1,17 +1,37 @@
 package hemisphere
 
-import (
-	"github.com/gellel/earthenarium/latitude"
-	"github.com/gellel/earthenarium/longtitude"
+const (
+	Antarctic string = "Antarctic"
 )
 
-type Hemisphere struct {
-	X string
-	Y string
-}
+const (
+	Arctic string = "Arctic"
+)
 
-func NewHemisphere(latitude *latitude.Latitude, longitude *longtitude.Longtitude) *Hemisphere {
-	return &Hemisphere{
-		X: longitude.Hemisphere(),
-		Y: latitude.Hemisphere()}
-}
+const (
+	Eastern string = "Eastern"
+)
+
+const (
+	Equator string = "Equator"
+)
+
+const (
+	Meridian string = "Meridian"
+)
+
+const (
+	Northern string = "Northern"
+)
+
+const (
+	Southern string = "Southern"
+)
+
+const (
+	Western string = "Western"
+)
+
+type Hemisphere struct{}
+
+func (hemisphere *Hemisphere) Latitude(coordinate float32) {}
