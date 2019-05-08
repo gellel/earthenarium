@@ -1,5 +1,11 @@
 package season
 
+import (
+	"fmt"
+
+	"github.com/gellel/earthenarium/chronograph"
+)
+
 const (
 	start string = "T00:00:00Z"
 	end   string = "T23:59:59Z"
@@ -32,3 +38,18 @@ var (
 	Epochs = [][]string{
 		T12X02, T03X05, T06X08, T09X11}
 )
+
+func Seasonalize(t *chronograph.Time) (string, string) {
+	switch t.Month.Name {
+	case "December", "Janurary", "Feburary":
+		if t.Month.Name == "December" {
+			return fmt.Sprintf(T12X02[0], t.Year), fmt.Sprintf(T12X02[1], t.Year+1)
+		}
+		return fmt.Sprintf(T12X02[0], t.Year), fmt.Sprintf(T12X02[1], t.Year)
+	}
+	return "", ""
+}
+
+func SeasonFromTime(t *chronograph.Time) {
+
+}

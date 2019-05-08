@@ -79,6 +79,10 @@ func NewSpan(a *Time, b *Time) *Span {
 		Years:   years}
 }
 
+func NewSpanFromISO(a, b string) *Span {
+	return NewSpan(NewTimeFromISO(a), NewTimeFromISO(b))
+}
+
 func NewTime(timestamp *time.Time) *Time {
 	return &Time{
 		Day:    NewDay(timestamp),

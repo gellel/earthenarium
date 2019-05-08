@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/gellel/earthenarium/chronograph"
 	"github.com/gellel/earthenarium/season"
 )
 
@@ -29,7 +30,15 @@ func main() {
 
 	//t := chronograph.NewTime(&now)
 
-	fmt.Println(season.Epochs)
+	str := "2015-12-23T05:02:12Z"
+
+	a := chronograph.NewTimeFromISO(str)
+
+	s, e := season.Seasonalize(a)
+
+	d := chronograph.NewSpanFromISO(s, e)
+
+	fmt.Println(d.Days)
 
 	//fmt.Println(season.GetSeason(coordinate.NewCoordinate(89, 135), chronograph.NewTime(&t)))
 
