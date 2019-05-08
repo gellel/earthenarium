@@ -136,8 +136,8 @@ func NewTime(time time.Time) *Time {
 		Zone:   NewZone(time)}
 }
 
-func NewTimeFromISO(str string) *Time {
-	time, err := time.Parse(Layout, str)
+func NewTimeFromISO(ISO string) *Time {
+	time, err := time.Parse(Layout, ISO)
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/gellel/earthenarium/chronograph"
+	"github.com/gellel/earthenarium/hemisphere"
 )
 
 const (
@@ -16,30 +17,56 @@ const (
 
 var (
 	// T12X02 expresses the epoch timestamp from December to Feburary of the next year.
-	T12X02 = []string{
+	T12X02 = Timeset{
 		("%v-12-01" + timestampStart),
 		("%v-02-28" + timestampEnd)}
 	// T03X05 expresses the epoch timestamp from March to May of the current year.
-	T03X05 = []string{
+	T03X05 = Timeset{
 		("%v-03-01" + timestampStart),
 		("%v-05-31" + timestampEnd)}
 	// T06X08 expresses the epoch timestamp from June to August of the current year.
-	T06X08 = []string{
+	T06X08 = Timeset{
 		("%v-06-01" + timestampStart),
 		("%v-08-31" + timestampEnd)}
 	// T09X11 expresses epoch timestamp from September to November of the current year.
-	T09X11 = []string{
+	T09X11 = Timeset{
 		("%v-09-01" + timestampStart),
 		("%v-11-30" + timestampEnd)}
 	// Timestamps contains available date ranges that can be computed for a calendar year.
 	// Slices are ordered chronologically from December of the previous year to November
 	// of the previous year + 1.
-	Timestamps = [][]string{
+	Timestamps = []Timeset{
 		T12X02, T03X05, T06X08, T09X11}
 )
 
-func fetch(a, b int, timestamp []string) (string, string) {
-	return fmt.Sprintf(timestamp[0], a), fmt.Sprintf(timestamp[1], b)
+func fetch(a, b int, timeset Timeset) (string, string) {
+	return fmt.Sprintf(timeset[0], a), fmt.Sprintf(timeset[1], b)
+}
+
+func northernSeason(t *chronograph.Time) string {
+	switch t.Month.T {
+	case time.December, time.January, time.February:
+		return "Winter"
+	case time.March, time.April, time.May:
+		return "Spring"
+	case time.June, time.July, time.August:
+		return "Summer"
+	default:
+		return "Autumn"
+	}
+}
+
+func southernSeason(t *chronograph.Time) string {
+	switch t.Month.T {
+	case time.December, time.January, time.February:
+		return "Summer"
+	case time.March, time.April, time.May:
+		return "Autumn"
+	case time.June, time.July, time.August:
+		return "Winter"
+	default:
+		return "Spring"
+	}
 }
 
 func timespan(begins, ends string) *Timespan {
@@ -52,8 +79,21 @@ func timespan(begins, ends string) *Timespan {
 		Spans:  s}
 }
 
-func NewSeason(region string, timespan *Timespan) *Season {
-	return &Season{}
+func NewSeason(hemisphere hemisphere.Hemisphere, timespan *Timespan) *Season {
+	if hemisphere.Latitude() != true {
+		panic(hemisphere.String())
+	}
+	var name string
+	return &Season{
+		Begins:     timespan.Begins,
+		Ends:       timespan.Ends,
+		Hemisphere: hemisphere,
+		Name:       name,
+		Spans:      timespan.Spans}
+}
+
+func NewSeasonFromISO(hemisphere hemisphere.Hemisphere, ISO string) *Season {
+	return NewSeason(hemisphere, NewTimespanFromISO(ISO))
 }
 
 func NewTimespan(t *chronograph.Time) *Timespan {
@@ -72,12 +112,22 @@ func NewTimespan(t *chronograph.Time) *Timespan {
 	}
 }
 
+func NewTimespanFromISO(ISO string) *Timespan {
+	return NewTimespan(chronograph.NewTimeFromISO(ISO))
+}
+
 type Season struct {
 	Begins     *chronograph.Time
 	Ends       *chronograph.Time
-	Hemisphere string
+	Hemisphere hemisphere.Hemisphere
 	Name       string
 	Spans      *chronograph.Span
+}
+
+type Timeset []string
+
+func (timeset Timeset) Sprintf(a, b int) (string, string) {
+	return fmt.Sprintf(timeset[0], a), fmt.Sprintf(timeset[1], b)
 }
 
 type Timespan struct {

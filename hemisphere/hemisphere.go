@@ -1,37 +1,18 @@
 package hemisphere
 
 const (
-	Antarctic string = "Antarctic"
+	Eastern  Hemisphere = Hemisphere("Eastern")
+	Northern Hemisphere = Hemisphere("Northern")
+	Southern Hemisphere = Hemisphere("Southern")
+	Western  Hemisphere = Hemisphere("Western")
 )
 
-const (
-	Arctic string = "Arctic"
-)
+type Hemisphere string
 
-const (
-	Eastern string = "Eastern"
-)
+func (hemisphere Hemisphere) Latitude() bool {
+	return hemisphere == Northern || hemisphere == Southern
+}
 
-const (
-	Equator string = "Equator"
-)
-
-const (
-	Meridian string = "Meridian"
-)
-
-const (
-	Northern string = "Northern"
-)
-
-const (
-	Southern string = "Southern"
-)
-
-const (
-	Western string = "Western"
-)
-
-type Hemisphere struct{}
-
-func (hemisphere *Hemisphere) Latitude(coordinate float32) {}
+func (hemisphere Hemisphere) String() string {
+	return string(hemisphere)
+}
