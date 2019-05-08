@@ -1,28 +1,34 @@
 package season
 
-import (
-	"github.com/gellel/earthenarium/chronograph"
-	"github.com/gellel/earthenarium/coordinate"
-	"github.com/gellel/earthenarium/hemisphere"
+const (
+	start string = "T00:00:00Z"
+	end   string = "T23:59:59Z"
 )
 
-type Season struct {
-	Begins *chronograph.Time
-	Ends   *chronograph.Time
-	Name   string
-	Spans  *chronograph.Span
-}
+var (
+	// T12X02 expresses the epoch timestamp from December to Feburary of the next year.
+	T12X02 = []string{
+		("%v-12-01" + start),
+		("%v-02-28" + end)}
 
-func NewSeason(latlong *coordinate.Coordinate) *Season {
-	return &Season{}
-}
+	// T03X05 expresses the epoch timestamp from March to May of the current year.
+	T03X05 = []string{
+		("%v-03-01" + start),
+		("%v-05-31" + end)}
 
-func GetSeason(latlong *coordinate.Coordinate, t *chronograph.Time) string {
-	switch latlong.Latitude.Region() {
-	case hemisphere.Antarctic:
-	case hemisphere.Arctic:
-	case hemisphere.Northern:
-	case hemisphere.Southern:
-	}
-	return ""
-}
+	// T06X08 expresses the epoch timestamp from June to August of the current year.
+	T06X08 = []string{
+		("%v-06-01" + start),
+		("%v-08-31" + end)}
+
+	// T09X11 expresses epoch timestamp from September to November of the current year.
+	T09X11 = []string{
+		("%v-09-01" + start),
+		("%v-11-30" + end)}
+)
+
+var (
+	// Epochs contains available date ranges that can be computed for a calendar year.
+	Epochs = [][]string{
+		T12X02, T03X05, T06X08, T09X11}
+)

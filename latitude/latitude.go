@@ -70,7 +70,7 @@ func (latitude *Latitude) Correct() bool {
 
 // Equator returns a boolean that identifies whether the Latitude value is situated approximately near or at the equator.
 func (latitude *Latitude) Equator() bool {
-	return (latitude.Absolute() < 10)
+	return (latitude.Absolute() < 5)
 }
 
 // From returns a Latitude expressing the distance between to Latitude pointers, using the current Latitude as the subtraction.
@@ -104,14 +104,13 @@ func (latitude *Latitude) Polar() bool {
 // Region returns a string that identifies the approximate position of the Latitude value.
 func (latitude *Latitude) Region() string {
 	num := latitude.Value()
-	fmt.Println(num, Minimum+10)
 	if (num < 0) && num < (Minimum+10) {
 		return hemisphere.Antarctic
 	}
 	if (num > 0) && num > (Maximum-10) {
 		return hemisphere.Arctic
 	}
-	if (num < 10) && (num > -10) {
+	if (num < 5) && (num > -5) {
 		return hemisphere.Equator
 	}
 	if num > 0 {

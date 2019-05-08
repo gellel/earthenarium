@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/gellel/earthenarium/latitude"
+	"github.com/gellel/earthenarium/season"
 )
 
 func main() {
@@ -24,8 +24,14 @@ func main() {
 
 	fmt.Print(season.GetSeason(latlong, a))*/
 
-	lat := latitude.NewLatitude(-81)
+	//fmt.Println(chronograph.NewTimeFromISO("0001-01-01T00:00:00Z").Second)
+	//now := time.Now()
 
-	fmt.Println(lat.Region(), lat.Antarctic())
+	//t := chronograph.NewTime(&now)
 
+	fmt.Println(season.Epochs)
+
+	//fmt.Println(season.GetSeason(coordinate.NewCoordinate(89, 135), chronograph.NewTime(&t)))
+
+	//fmt.Println(season.IsSouthernWinter(chronograph.NewTime(&t)))
 }
