@@ -31,14 +31,15 @@ type Span struct {
 }
 
 type Time struct {
-	Day    *Day
-	Days   int
-	Epoch  int64
-	Month  *Month
-	Second int
-	T      time.Time
-	Year   int
-	Zone   *Zone
+	Day       *Day
+	Days      int
+	Epoch     int64
+	Month     *Month
+	Second    int
+	Timestamp string
+	T         time.Time
+	Year      int
+	Zone      *Zone
 }
 
 type Zone struct {
@@ -126,14 +127,15 @@ func NewSpanFromISO(a, b string) *Span {
 
 func NewTime(time time.Time) *Time {
 	return &Time{
-		Day:    NewDay(time),
-		Days:   time.YearDay(),
-		Epoch:  time.Unix(),
-		Month:  NewMonth(time),
-		Second: time.Second(),
-		T:      time,
-		Year:   time.Year(),
-		Zone:   NewZone(time)}
+		Day:       NewDay(time),
+		Days:      time.YearDay(),
+		Epoch:     time.Unix(),
+		Month:     NewMonth(time),
+		Second:    time.Second(),
+		Timestamp: time.Format(Layout),
+		T:         time,
+		Year:      time.Year(),
+		Zone:      NewZone(time)}
 }
 
 func NewTimeFromISO(ISO string) *Time {
@@ -149,4 +151,19 @@ func NewZone(time time.Time) *Zone {
 	return &Zone{
 		Name:   name,
 		Offset: offset}
+}
+
+func (time *Time) AddDays(days int) *Time {
+	*time = *NewTime(time.T.AddDate(0, 0, days))
+	return time
+}
+
+func (time *Time) AddMonths(months int) *Time {
+	*time = *NewTime(time.T.AddDate(0, months, 0))
+	return time
+}
+
+func (time *Time) AddYears(years int) *Time {
+	*time = *NewTime(time.T.AddDate(years, 0, 0))
+	return time
 }

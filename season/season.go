@@ -131,6 +131,13 @@ func NewSeason(region string, t *chronograph.Time) *Season {
 		Spans:      timeSpan}
 }
 
+func NewSeasonNorth(t *chronograph.Time) *Season {
+	return NewSeason(hemisphere.Northern, t)
+}
+func NewSeasonSouth(t *chronograph.Time) *Season {
+	return NewSeason(hemisphere.Southern, t)
+}
+
 // Season stores a chronological data that expresses the Earth-like season.
 type Season struct {
 	Begins     *chronograph.Time
@@ -138,4 +145,14 @@ type Season struct {
 	Hemisphere string
 	Name       string
 	Spans      *chronograph.Span
+}
+
+func (season *Season) Previous() *Season {
+	*season = *NewSeason(season.Hemisphere, season.Begins.AddDays(-1))
+	return season
+}
+
+func (season *Season) Next() *Season {
+	*season = *NewSeason(season.Hemisphere, season.Ends.AddDays(1))
+	return season
 }
