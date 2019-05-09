@@ -6,6 +6,10 @@ import (
 )
 
 const (
+	U = C
+)
+
+const (
 	C string = "Celcius"
 	F string = "Fahrenheit"
 	K string = "Kelvin"
@@ -18,12 +22,28 @@ const (
 )
 
 const (
-	Maximum float32 = 44.0
-	Minimum float32 = -44.0
+	Average float32 = 14.0
+	Maximum float32 = 31.0
+	Minimum float32 = -41.0
 )
 
+var (
+	AboveZero = fibonacci(0, 2.025, 7)
+	BelowZero = fibonacci(0, -2.025, 7)
+)
+
+func fibonacci(a, b float32, n int) []float32 {
+	x := []float32{}
+	for i := 0; i < n; i++ {
+		T := a
+		a = b
+		b = T + a
+		x = append(x, b)
+	}
+	return x
+}
+
 func NewTemperature(coordinate *coordinate.Coordinate, season *season.Season) *Temperature {
-	coordinate.Latitude.Float64()
 
 	return &Temperature{}
 }
