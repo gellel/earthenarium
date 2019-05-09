@@ -51,14 +51,19 @@ var (
 )
 
 var (
+	// M12X02 contains the months that coincide with T12X02 (December, January, February).
 	M12X02 = []time.Month{
 		time.December, time.January, time.February}
+	// M03X05 contains the months that coincide with T03X05 (March, April, May).
 	M03X05 = []time.Month{
 		time.March, time.April, time.May}
+	// M06X08 contains the months that coincide with T06X08 (June, July, August).
 	M06X08 = []time.Month{
 		time.June, time.July, time.August}
+	// M09X11 contains the months that coincide with T03X05 (September, October, November).
 	M09X11 = []time.Month{
 		time.September, time.October, time.November}
+	// Months contains available months from time.Month ordered to coincide with the seasonal timestamps.
 	Months = [][]time.Month{
 		M12X02, M03X05, M06X08, M09X11}
 )

@@ -9,44 +9,6 @@ const (
 	Layout string = "2006-01-02T15:04:05.000Z"
 )
 
-type Day struct {
-	Name   string
-	Number int
-	T      time.Weekday
-}
-
-type Month struct {
-	Name   string
-	Number int
-	T      time.Month
-}
-
-type Span struct {
-	Days    int
-	Hours   int
-	Minutes int
-	Months  int
-	Seconds int
-	Years   int
-}
-
-type Time struct {
-	Day       *Day
-	Days      int
-	Epoch     int64
-	Month     *Month
-	Second    int
-	Timestamp string
-	T         time.Time
-	Year      int
-	Zone      *Zone
-}
-
-type Zone struct {
-	Name   string
-	Offset int
-}
-
 func NewDay(time time.Time) *Day {
 	t := time.Weekday()
 	return &Day{
@@ -151,6 +113,44 @@ func NewZone(time time.Time) *Zone {
 	return &Zone{
 		Name:   name,
 		Offset: offset}
+}
+
+type Day struct {
+	Name   string
+	Number int
+	T      time.Weekday
+}
+
+type Month struct {
+	Name   string
+	Number int
+	T      time.Month
+}
+
+type Span struct {
+	Days    int
+	Hours   int
+	Minutes int
+	Months  int
+	Seconds int
+	Years   int
+}
+
+type Time struct {
+	Day       *Day
+	Days      int
+	Epoch     int64
+	Month     *Month
+	Second    int
+	Timestamp string
+	T         time.Time
+	Year      int
+	Zone      *Zone
+}
+
+type Zone struct {
+	Name   string
+	Offset int
 }
 
 func (time *Time) AddDays(days int) *Time {

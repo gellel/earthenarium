@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gellel/earthenarium/season"
+	"github.com/gellel/earthenarium/temperature"
 
 	"github.com/gellel/earthenarium/chronograph"
 )
@@ -18,4 +19,9 @@ func main() {
 
 	fmt.Println(season.Next())
 
+	t := &temperature.Temperature{
+		Max: 24.7,
+		Min: 14.5}
+
+	fmt.Println(t.Fahrenheit())
 }
