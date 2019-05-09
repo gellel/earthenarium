@@ -96,6 +96,7 @@ func NewTime(time time.Time) *Time {
 		Second:    time.Second(),
 		Timestamp: time.Format(Layout),
 		T:         time,
+		Unix:      time.Unix(),
 		Year:      time.Year(),
 		Zone:      NewZone(time)}
 }
@@ -106,6 +107,10 @@ func NewTimeFromISO(ISO string) *Time {
 		fmt.Println(err)
 	}
 	return NewTime(time)
+}
+
+func NewTimeFromUnix(unix int64) *Time {
+	return NewTime(time.Unix(unix, 0))
 }
 
 func NewZone(time time.Time) *Zone {
@@ -144,6 +149,7 @@ type Time struct {
 	Second    int
 	Timestamp string
 	T         time.Time
+	Unix      int64
 	Year      int
 	Zone      *Zone
 }

@@ -12,9 +12,9 @@ const (
 )
 
 const (
-	// Maximum easternly distance permitted across the celestial bodies X axis.
+	// Maximum easternly distance (in degrees) permitted across the celestial bodies X axis.
 	Maximum float32 = 180
-	// Minimum westernly distance permitted across the celestial bodies X axis.
+	// Minimum westernly distance (in degrees) permitted across the celestial bodies X axis.
 	Minimum float32 = -180
 )
 
@@ -61,6 +61,11 @@ func (longtitude *Longtitude) Correct() bool {
 // East returns a boolean that identifies whether the Longtitude value is situated east of the prime-meridian.
 func (longtitude *Longtitude) East() bool {
 	return (longtitude.Value() > 0)
+}
+
+// Float64 returns a the Longtitude value as a 64 bit floating number.
+func (longtitude *Longtitude) Float64() float64 {
+	return float64(*longtitude)
 }
 
 // From returns a Longtitude expressing the distance between to Longtitude pointers, using the current Latitude as the subtraction.

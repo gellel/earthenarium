@@ -1,5 +1,10 @@
 package temperature
 
+import (
+	"github.com/gellel/earthenarium/coordinate"
+	"github.com/gellel/earthenarium/season"
+)
+
 const (
 	C string = "Celcius"
 	F string = "Fahrenheit"
@@ -11,6 +16,17 @@ const (
 	Fahrenheit float32 = 32.0
 	Kelvin     float32 = 273.15
 )
+
+const (
+	Maximum float32 = 44.0
+	Minimum float32 = -44.0
+)
+
+func NewTemperature(coordinate *coordinate.Coordinate, season *season.Season) *Temperature {
+	coordinate.Latitude.Float64()
+
+	return &Temperature{}
+}
 
 type Temperature struct {
 	Max float32

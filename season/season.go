@@ -140,6 +140,7 @@ func NewSeason(region string, t *chronograph.Time) *Season {
 	a, b, months := Timespan(t)
 	timeBegins := chronograph.NewTimeFromISO(a)
 	timeEnds := chronograph.NewTimeFromISO(b)
+	timeMedian := chronograph.NewTimeFromUnix((timeBegins.Unix + timeEnds.Unix) / 2)
 	timeSpan := chronograph.NewSpan(timeBegins.T, timeEnds.T)
 	duration := timeEnds.T.Sub(timeBegins.T)
 	return &Season{
@@ -148,10 +149,12 @@ func NewSeason(region string, t *chronograph.Time) *Season {
 		Ends:       timeEnds,
 		Hemisphere: region,
 		Hours:      int(duration.Hours()),
+		Median:     timeMedian,
 		Minutes:    int(duration.Minutes()),
 		Months:     months,
 		Name:       name,
-		Spans:      timeSpan}
+		Spans:      timeSpan,
+		Time:       t}
 }
 
 // NewSeasonNorth creates a new Season pointer oriented for northern hemisphere climates.
@@ -171,10 +174,22 @@ type Season struct {
 	Ends       *chronograph.Time
 	Hemisphere string
 	Hours      int
+	Median     *chronograph.Time
 	Minutes    int
 	Months     []time.Month
 	Name       string
 	Spans      *chronograph.Span
+	Time       *chronograph.Time
+}
+
+// Aforetime returns a boolean indicating that the season.Time is before the season.Median.
+func (season *Season) Aforetime() bool {
+	return season.Time.Unix < season.Median.Unix
+}
+
+// Hindmost returns a boolean indicating that the season time is beyond the season.Median.
+func (season *Season) Hindmost() bool {
+	return season.Time.Unix >= season.Median.Unix
 }
 
 // Previous updates the Season pointer to its previous chronological iteration.

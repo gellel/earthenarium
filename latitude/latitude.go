@@ -73,6 +73,11 @@ func (latitude *Latitude) Equator() bool {
 	return (latitude.Absolute() < 5)
 }
 
+// Float64 returns a the Latitude value as a 64 bit floating number.
+func (latitude *Latitude) Float64() float64 {
+	return float64(*latitude)
+}
+
 // From returns a Latitude expressing the distance between to Latitude pointers, using the current Latitude as the subtraction.
 func (latitude *Latitude) From(l *Latitude) *Latitude {
 	return NewLatitude(l.Value() - latitude.Value())
