@@ -131,9 +131,12 @@ func NewSeason(region string, t *chronograph.Time) *Season {
 		Spans:      timeSpan}
 }
 
+// NewSeasonNorth creates a new Season pointer oriented for northern hemisphere climates.
 func NewSeasonNorth(t *chronograph.Time) *Season {
 	return NewSeason(hemisphere.Northern, t)
 }
+
+// NewSeasonSouth creates a new Season pointer oriented for southern hemisphere climates.
 func NewSeasonSouth(t *chronograph.Time) *Season {
 	return NewSeason(hemisphere.Southern, t)
 }
@@ -147,11 +150,13 @@ type Season struct {
 	Spans      *chronograph.Span
 }
 
+// Previous updates the Season pointer to its previous chronological iteration.
 func (season *Season) Previous() *Season {
 	*season = *NewSeason(season.Hemisphere, season.Begins.AddDays(-1))
 	return season
 }
 
+// Next updates the Season pointer to its next chronological iteration.
 func (season *Season) Next() *Season {
 	*season = *NewSeason(season.Hemisphere, season.Ends.AddDays(1))
 	return season
