@@ -70,12 +70,10 @@ func (longtitude *Longtitude) From(l *Longtitude) *Longtitude {
 
 // Hemisphere returns a string describing the celestial hemisphere the Longtitute value is situated.
 func (longtitude *Longtitude) Hemisphere() string {
-	east := longtitude.East()
-	if east == true {
+	if longtitude.East() {
 		return hemisphere.Eastern
 	}
-	west := longtitude.West()
-	if west == true {
+	if longtitude.West() {
 		return hemisphere.Western
 	}
 	return hemisphere.Meridian

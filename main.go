@@ -16,5 +16,6 @@ func main() {
 
 	fmt.Println(season)
 
-	fmt.Println(season.Next().Begins.Timestamp)
+	fmt.Println(season.Next())
+
 }

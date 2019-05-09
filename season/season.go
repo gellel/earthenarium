@@ -50,11 +50,24 @@ var (
 		T12X02, T03X05, T06X08, T09X11}
 )
 
-func format(a, b int, timestamps []string) (string, string) {
-	return fmt.Sprintf(timestamps[0], a), fmt.Sprintf(timestamps[1], b)
+var (
+	M12X02 = []time.Month{
+		time.December, time.January, time.February}
+	M03X05 = []time.Month{
+		time.March, time.April, time.May}
+	M06X08 = []time.Month{
+		time.June, time.July, time.August}
+	M09X11 = []time.Month{
+		time.September, time.October, time.November}
+	Months = [][]time.Month{
+		M12X02, M03X05, M06X08, M09X11}
+)
+
+func format(a, b int, timestamps []string, months []time.Month) (string, string, []time.Month) {
+	return fmt.Sprintf(timestamps[0], a), fmt.Sprintf(timestamps[1], b), months
 }
 
-// Northernize localises season conditions to align to the chronological timings of the Earth's northern hemisphere.
+// Northernize localises season chronography to align to the chronological timings of the Earth's northern hemisphere.
 func Northernize(t *chronograph.Time) string {
 	switch t.Month.T {
 	case time.December, time.January, time.February:
@@ -80,7 +93,7 @@ func Select(region string, t *chronograph.Time) string {
 	return Southernize(t)
 }
 
-// Southernize localises season conditions to align to the chronological timings of the Earth's southern hemisphere.
+// Southernize localises season chronography to align to the chronological timings of the Earth's southern hemisphere.
 func Southernize(t *chronograph.Time) string {
 	switch t.Month.T {
 	case time.December, time.January, time.February:
@@ -96,19 +109,19 @@ func Southernize(t *chronograph.Time) string {
 
 // Timespan breaks down the datetime data held by the chronograph.Time struct to generate a lower and upper bounds of a season.
 // Season span generated is not regionalized and needs to be cross-checked against a hemisphere.
-func Timespan(t *chronograph.Time) (string, string) {
+func Timespan(t *chronograph.Time) (string, string, []time.Month) {
 	switch t.Month.T {
 	case time.December, time.January, time.February:
 		if t.Month.T == time.December {
-			return format(t.Year, (t.Year + 1), T12X02)
+			return format(t.Year, (t.Year + 1), T12X02, M12X02)
 		}
-		return format((t.Year - 1), t.Year, T12X02)
+		return format((t.Year - 1), t.Year, T12X02, M12X02)
 	case time.March, time.April, time.May:
-		return format(t.Year, t.Year, T03X05)
+		return format(t.Year, t.Year, T03X05, M03X05)
 	case time.June, time.July, time.August:
-		return format(t.Year, t.Year, T06X08)
+		return format(t.Year, t.Year, T06X08, M06X08)
 	default:
-		return format(t.Year, t.Year, T09X11)
+		return format(t.Year, t.Year, T09X11, M09X11)
 	}
 }
 
@@ -119,14 +132,19 @@ func NewSeason(region string, t *chronograph.Time) *Season {
 		panic(region)
 	}
 	name := Select(region, t)
-	a, b := Timespan(t)
+	a, b, months := Timespan(t)
 	timeBegins := chronograph.NewTimeFromISO(a)
 	timeEnds := chronograph.NewTimeFromISO(b)
 	timeSpan := chronograph.NewSpan(timeBegins.T, timeEnds.T)
+	duration := timeEnds.T.Sub(timeBegins.T)
 	return &Season{
 		Begins:     timeBegins,
+		Days:       int(duration.Hours() / 24),
 		Ends:       timeEnds,
 		Hemisphere: region,
+		Hours:      int(duration.Hours()),
+		Minutes:    int(duration.Minutes()),
+		Months:     months,
 		Name:       name,
 		Spans:      timeSpan}
 }
@@ -144,8 +162,12 @@ func NewSeasonSouth(t *chronograph.Time) *Season {
 // Season stores a chronological data that expresses the Earth-like season.
 type Season struct {
 	Begins     *chronograph.Time
+	Days       int
 	Ends       *chronograph.Time
 	Hemisphere string
+	Hours      int
+	Minutes    int
+	Months     []time.Month
 	Name       string
 	Spans      *chronograph.Span
 }
