@@ -1,31 +1,47 @@
 package time
 
 import (
+	"fmt"
 	"time"
-	t "time"
 )
 
+// Argparse takes an input of three time components to generate a localized timestamp.
+// Timestamp is intended to be received as YYYY-MM-DDTHH-MM-SS.NNNZ.
+// Zone is expected to resemble a region of the Earth's geography, supported list is exported as Time.Timezones.
+// City is a Title-case underscore-separated name, for example New_York, Isle_of_Man, etc.
 func Argparse(timestamp, zone, city string) time.Time {
-	location, err := t.LoadLocation(NewLocation(zone, city).String())
-	ok := err == nil
+	l := NewLocation(zone, city)
+	ok := l.Correct()
 	if ok != true {
-		panic(err)
+		panic(fmt.Errorf("location string is not formatted correctly \"%s\"", l.String()))
 	}
-	time, err := time.Parse(Layout, "0000-01-01T00:00:00.000Z")
+	location, err := time.LoadLocation(l.String())
 	ok = err == nil
 	if ok != true {
 		panic(err)
 	}
-	time = time.In(location)
-	time = time.Add(t.Duration(-time.Nanosecond()) * t.Nanosecond)
-	time = time.Add(t.Duration(-time.Second()) * t.Second)
-	time = time.Add(t.Duration(-time.Minute()) * t.Minute)
-	time = time.Add(t.Duration(-time.Hour()) * t.Hour)
-	UTC, _ := t.Parse(Layout, timestamp)
-	time = time.AddDate(UTC.Year(), int(UTC.Month()-1), UTC.Day())
-	time = time.Add(t.Duration(UTC.Nanosecond()) * t.Nanosecond)
-	time = time.Add(t.Duration(UTC.Second()) * t.Second)
-	time = time.Add(t.Duration(UTC.Minute()) * t.Minute)
-	time = time.Add(t.Duration(UTC.Hour()) * t.Hour)
-	return time
+	local, err := time.Parse(Layout, "0000-01-01T00:00:00.000Z")
+	ok = err == nil
+	if ok != true {
+		panic(err)
+	}
+	UTC, _ := time.Parse(Layout, timestamp)
+	ok = err == nil
+	if ok != true {
+		panic(err)
+	}
+	/* localize dummy timestamp */
+	local = local.In(location)
+	/* remove required minimum padding from time */
+	local = local.Add(time.Duration(-local.Nanosecond()) * time.Nanosecond)
+	local = local.Add(time.Duration(-local.Second()) * time.Second)
+	local = local.Add(time.Duration(-local.Minute()) * time.Minute)
+	local = local.Add(time.Duration(-local.Hour()) * time.Hour)
+	/* add time from argument timestamp */
+	local = local.AddDate(UTC.Year(), int(UTC.Month()-1), UTC.Day())
+	local = local.Add(time.Duration(UTC.Nanosecond()) * time.Nanosecond)
+	local = local.Add(time.Duration(UTC.Second()) * time.Second)
+	local = local.Add(time.Duration(UTC.Minute()) * time.Minute)
+	local = local.Add(time.Duration(UTC.Hour()) * time.Hour)
+	return local
 }

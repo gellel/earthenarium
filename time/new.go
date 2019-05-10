@@ -33,7 +33,9 @@ func NewDaypart(hour int) Daypart {
 }
 
 func NewLocation(zone, city string) Location {
-	namespace := fmt.Sprintf("%s/%s", NewZone(zone).String(), NewCity(city).String())
+	city = NewCity(city).String()
+	zone = NewZone(zone).String()
+	namespace := fmt.Sprintf("%s/%s", zone, city)
 	return Location(namespace)
 }
 

@@ -1,7 +1,13 @@
 package time
 
 // Dayparts holds the supported arguments for use in time.NewDaypart.
-var Dayparts = map[string]int{}
+var Dayparts = map[string]int{
+	"Dawn":      1,
+	"Morning":   2,
+	"Afternoon": 3,
+	"Evening":   4,
+	"Dusk":      5,
+	"Night":     6}
 
 // Timezones holds the supported arguments for use in time.NewZone.
 var Timezones = map[string]int{
