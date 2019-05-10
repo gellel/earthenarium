@@ -2,22 +2,29 @@ package main
 
 import (
 	"fmt"
+	"os"
 
-	"github.com/gellel/earthenarium/season"
-	"github.com/gellel/earthenarium/temperature"
-
-	"github.com/gellel/earthenarium/chronograph"
+	"github.com/gellel/earthenarium/time"
 )
 
 func main() {
 
-	season := season.NewSeasonNorth(chronograph.NewTimeFromISO("2015-01-01T11:11:59.000Z"))
+	fmt.Println(time.Argparse(os.Args[1], os.Args[2], os.Args[3]))
 
-	// coordinate := coordinate.NewCoordinate(44.1, 112.3, (80+180)/2)
+	/*
+		fmt.Println(time.Now().ISOWeek())
 
-	//	temperature := temperature.NewTemperature(coordinate, season)
+		x, _ := time.LoadLocation("Australia/Sydney")
+		fmt.Println(x)
 
-	fmt.Println(season.Aforetime(), season.Hindmost())
+		season := season.NewSeasonNorth(chronograph.NewTimeFromISO("2015-01-01T11:11:59.000Z"))
 
-	fmt.Println(temperature.AboveZero, temperature.BelowZero)
+		// coordinate := coordinate.NewCoordinate(44.1, 112.3, (80+180)/2)
+
+		//	temperature := temperature.NewTemperature(coordinate, season)
+
+		fmt.Println(season.Aforetime(), season.Hindmost())
+
+		fmt.Println(temperature.AboveZero, temperature.BelowZero)
+	*/
 }
