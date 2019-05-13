@@ -3,7 +3,7 @@ package chronograph
 import (
 	"fmt"
 	"regexp"
-	"time"
+	"strconv"
 )
 
 // Timestamp is intended to be received as YYYY-MM-DDTHH-MM-SS.NNNZ.
@@ -55,21 +55,6 @@ func (timestamp *Timestamp) Hour() (hour string) {
 	return hour
 }
 
-// Millisecond captures the millisecond substring from the Timestamp pointer and returns it as a string.
-func (timestamp *Timestamp) Millisecond() (millisecond string) {
-	content := string(*timestamp)
-	reg, err := regexp.Compile("\\d{3}Z")
-	if ok := (err == nil); !ok {
-		panic(err)
-	}
-	captures := reg.FindStringSubmatch(content)
-	if ok := (len(captures) == 2); !ok {
-		return millisecond
-	}
-	millisecond = captures[1]
-	return millisecond
-}
-
 // Minute captures the minute substring from the Timestamp pointer and returns it as a string.
 func (timestamp *Timestamp) Minute() (minute string) {
 	content := string(*timestamp)
@@ -100,9 +85,31 @@ func (timestamp *Timestamp) Month() (month string) {
 	return month
 }
 
+// Nanosecond captures the millisecond substring from the Timestamp pointer and returns it as a string.
+func (timestamp *Timestamp) Nanosecond() (millisecond string) {
+	content := string(*timestamp)
+	reg, err := regexp.Compile("\\d{3}Z")
+	if ok := (err == nil); !ok {
+		panic(err)
+	}
+	captures := reg.FindStringSubmatch(content)
+	if ok := (len(captures) == 2); !ok {
+		return millisecond
+	}
+	millisecond = captures[1]
+	return millisecond
+}
+
 // Parse parses a formatted string and returns the time value it represents.
-func (timestamp *Timestamp) Parse() (time.Time, error) {
-	return time.Parse(Layout, timestamp.String())
+func (timestamp *Timestamp) Parse() (year, month, day, hour, minute, second, nanosecond int) {
+	year, _ = strconv.Atoi(timestamp.Year())
+	month, _ = strconv.Atoi(timestamp.Month())
+	day, _ = strconv.Atoi(timestamp.Day())
+	hour, _ = strconv.Atoi(timestamp.Hour())
+	minute, _ = strconv.Atoi(timestamp.Minute())
+	second, _ = strconv.Atoi(timestamp.Second())
+	nanosecond, _ = strconv.Atoi(timestamp.Nanosecond())
+	return year, month, day, hour, minute, second, nanosecond
 }
 
 // Second captures the second fragment from the Timestamp pointer and returns it as a string.

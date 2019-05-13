@@ -1,7 +1,7 @@
 package chronograph
 
 const (
-	Default         = "0000-01-01T00:00:00.000Z"
+	Default         = "1970-01-01T00:00:00.000Z"
 	Layout          = "2006-01-02T15:04:05.000Z"
 	timestampSample = "YYYY-MM-DDTHH:MM:SS.NNNZ"
 )

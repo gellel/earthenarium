@@ -4,6 +4,7 @@ import "time"
 
 type Time struct {
 	Day        *Day
+	Hour       int
 	Location   *time.Location
 	Minute     int
 	Month      *Month

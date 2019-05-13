@@ -27,42 +27,16 @@ func NewTime(timestamp, zone, city string) *Time {
 	if ok := err == nil; !ok {
 		panic(err)
 	}
-	local, err := time.Parse(Layout, Default)
-	if ok := err == nil; !ok {
-		panic(err)
-	}
-	UTC, _ := time.Parse(Layout, timestamp)
-	if ok := err == nil; !ok {
-		panic(err)
-	}
-	/* deconstruct timestamp components */
-	nanosecond := UTC.Nanosecond()
-	second := UTC.Second()
-	minute := UTC.Minute()
-	hour := UTC.Hour()
-	day := UTC.Day()
-	month := UTC.Month()
-	year := UTC.Year()
-	/* localize dummy timestamp */
-	local = local.In(location)
-	/* remove required minimum padding from time */
-	local = local.Add(time.Duration(-nanosecond) * time.Nanosecond)
-	local = local.Add(time.Duration(-second) * time.Second)
-	local = local.Add(time.Duration(-minute) * time.Minute)
-	local = local.Add(time.Duration(-hour) * time.Hour)
-	/* add time from argument timestamp */
-	local = local.AddDate(year, int(month)-1, day)
-	local = local.Add(time.Duration(nanosecond) * time.Nanosecond)
-	local = local.Add(time.Duration(second) * time.Second)
-	local = local.Add(time.Duration(minute) * time.Minute)
-	local = local.Add(time.Duration(hour) * time.Hour)
+	year, month, day, hour, minute, second, nanosecond := t.Parse()
+	local := time.Date(year, time.Month(month), day, hour, minute, second, nanosecond, location)
 	return &Time{
-		Day:        NewDay(day, local.YearDay(), local.Weekday()),
+		Day:        NewDay(local.Day(), local.YearDay(), local.Weekday()),
+		Hour:       local.Hour(),
 		Location:   location,
-		Minute:     minute,
-		Month:      NewMonth(month),
-		Nanosecond: nanosecond,
-		Second:     second,
+		Minute:     local.Minute(),
+		Month:      NewMonth(local.Month()),
+		Nanosecond: local.Nanosecond(),
+		Second:     local.Second(),
 		Time:       &local,
 		Unix:       local.Unix(),
 		Year:       local.Year()}
