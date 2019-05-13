@@ -20,3 +20,15 @@ const (
 	Northern  Latitude = Latitude(latitude.Maximum)
 	Southern  Latitude = Latitude(latitude.Minimum)
 )
+
+const (
+	AntarcticCircle    Label = Label("Antarctic Circle")
+	ArcticCircle       Label = Label("Arctic Circle")
+	TropicOfCancer     Label = Label("Tropic of Cancer")
+	TropicOfCapricorn  Label = Label("Tropic of Capricorn")
+	EquatorLine        Label = Label("Equator")
+	EasternHemisphere  Label = Label("Eastern Hemisphere")
+	NorthernHemisphere Label = Label("Northern Hemisphere")
+	SouthernHemisphere Label = Label("Southern Hemisphere")
+	WesternHemisphere  Label = Label("Western Hemisphere")
+)

@@ -22,6 +22,22 @@ func (latitude Latitude) Equator() bool {
 	return latitude == Equator
 }
 
+func (latitude Latitude) Name() Label {
+	if latitude.Antarctic() {
+		return ArcticCircle
+	} else if latitude.Arctic() {
+		return ArcticCircle
+	} else if latitude.Cancer() {
+		return TropicOfCancer
+	} else if latitude.Equator() {
+		return EquatorLine
+	} else if latitude.North() {
+		return NorthernHemisphere
+	} else {
+		return SouthernHemisphere
+	}
+}
+
 func (latitude Latitude) North() bool {
 	return latitude > Equator
 }

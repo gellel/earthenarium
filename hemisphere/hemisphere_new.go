@@ -6,5 +6,7 @@ import (
 )
 
 func NewHemisphere(latitude *latitude.Latitude, longtitude *longtitude.Longtitude) *Hemisphere {
-	return &Hemisphere{}
+	return &Hemisphere{
+		Latitude:   NewLatitude(latitude),
+		Longtitude: NewLongtitude(longtitude)}
 }
