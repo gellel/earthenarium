@@ -2,29 +2,28 @@ package main
 
 import (
 	"fmt"
-	"os"
 
-	"github.com/gellel/earthenarium/time"
+	"github.com/gellel/earthenarium/chronograph"
+	"github.com/gellel/earthenarium/elevation"
+	"github.com/gellel/earthenarium/hemisphere"
 )
 
 func main() {
 
-	fmt.Println(time.Argparse(os.Args[1], os.Args[2], os.Args[3]))
+	zone := "australia"
+	city := "sydney"
+	a := "2019-01-01T01:00:00.000Z"
+	b := "2019-05-01T01:00:00.000Z"
 
-	/*
-		fmt.Println(time.Now().ISOWeek())
+	x := chronograph.NewTime(a, zone, city)
+	y := chronograph.NewTime(b, zone, city)
+	z := chronograph.NewTimespan(x, y)
 
-		x, _ := time.LoadLocation("Australia/Sydney")
-		fmt.Println(x)
+	fmt.Println(x)
+	fmt.Println(y)
+	fmt.Println(z)
 
-		season := season.NewSeasonNorth(chronograph.NewTimeFromISO("2015-01-01T11:11:59.000Z"))
-
-		// coordinate := coordinate.NewCoordinate(44.1, 112.3, (80+180)/2)
-
-		//	temperature := temperature.NewTemperature(coordinate, season)
-
-		fmt.Println(season.Aforetime(), season.Hindmost())
-
-		fmt.Println(temperature.AboveZero, temperature.BelowZero)
-	*/
+	fmt.Println(hemisphere.Equator)
+	fmt.Println(elevation.Measurement)
+	fmt.Println(hemisphere.Cancer.North())
 }

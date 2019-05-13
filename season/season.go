@@ -178,7 +178,7 @@ type Season struct {
 	Minutes    int
 	Months     []time.Month
 	Name       string
-	Spans      *chronograph.Span
+	Spans      *chronograph.Timespan
 	Time       *chronograph.Time
 }
 

@@ -1,1 +1,0 @@
-`time.Argparse YYY-MM-DDTHH:MM:SS.NNNZ COUNTRY CITY`
