@@ -1,6 +1,8 @@
 package hemisphere
 
 import (
+	"fmt"
+
 	"github.com/gellel/earthenarium/longtitude"
 )
 
@@ -12,5 +14,8 @@ func NewLongtitude(longtitude *longtitude.Longtitude) Longtitude {
 	if l < prime && l >= west {
 		return Longtitude{West, westLabel, westLabel}
 	}
-	return Longtitude{Prime, primeLabel, primeLabel}
+	if l > prime {
+		return Longtitude{Prime, primeLabel, fmt.Sprintf("%s east", primeLabel)}
+	}
+	return Longtitude{Prime, primeLabel, fmt.Sprintf("%s west", primeLabel)}
 }
