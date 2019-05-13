@@ -1,7 +1,7 @@
 package longtitude
 
 const (
-	errorLongtitude string = "latitude \"%v\" exceeds supported range; cannot eclipse \"%v\" or \"%v\""
+	errorLongtitude string = "longtitude \"%v\" exceeds supported range; cannot eclipse \"%v\" or \"%v\""
 )
 
 const (
