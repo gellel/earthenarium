@@ -7,14 +7,14 @@ const (
 	end string = "T23:59:59.999Z"
 )
 const (
-	autumn string = "autumn"
+	Autumn string = "autumn"
 )
 const (
-	spring string = "spring"
+	Spring string = "spring"
 )
 const (
-	summer string = "summer"
+	Summer string = "summer"
 )
 const (
-	winter string = "winter"
+	Winter string = "winter"
 )

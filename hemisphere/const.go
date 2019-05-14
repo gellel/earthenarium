@@ -6,6 +6,10 @@ import (
 )
 
 const (
+	divison float32 = 0.00001
+)
+
+const (
 	north float32 = latitude.Maximum
 	south float32 = latitude.Minimum
 )
@@ -31,33 +35,39 @@ const (
 )
 
 const (
-	northLabel = "northern hemisphere"
-	southLabel = "southern hemisphere"
+	northLabel string = "northern hemisphere"
+	southLabel string = "southern hemisphere"
 )
 
 const (
-	eastLabel = "eastern hemisphere"
-	westLabel = "western hemisphere"
+	eastLabel string = "eastern hemisphere"
+	westLabel string = "western hemisphere"
 )
 
 const (
-	equatorLabel = "equator"
-	primeLabel   = "prime meridian"
+	equatorLabel string = "equator"
+	primeLabel   string = "prime meridian"
 )
 
 const (
-	antarcticLabel = "antarctic circle"
-	arcticLabel    = "arctic circle"
+	antarcticLabel string = "antarctic circle"
+	arcticLabel    string = "arctic circle"
 )
 
 const (
-	cancerLabel    = "tropic of cancer"
-	capricornLabel = "tropic of capricorn"
+	cancerLabel    string = "tropic of cancer"
+	capricornLabel string = "tropic of capricorn"
 )
 
 const (
 	N string = northLabel
+)
+const (
 	E string = eastLabel
+)
+const (
 	S string = southLabel
+)
+const (
 	W string = westLabel
 )

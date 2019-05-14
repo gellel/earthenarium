@@ -15,12 +15,12 @@ func NewSeason(t *chronograph.Time, h *hemisphere.Hemisphere) *Season {
 	if month == time.December || month == time.January || month == time.February {
 		year = year - 1
 	}
-	first := time.Date(year, term.Months[0], 1, 0, 0, 0, 0, t.Location)
-	begins := chronograph.NewTime(&first)
-	last := time.Date(begins.Year.Number, (term.Months[2] + 1), 1, 0, 0, 0, 0, t.Location).Add(time.Nanosecond * -1)
-	ends := chronograph.NewTime(&last)
+	begins := chronograph.NewTime(time.Date(year, term.Months[0], 1, 0, 0, 0, 0, t.Location))
+	ends := chronograph.NewTime(time.Date(begins.Year.Number, (term.Months[2] + 1), 1, 0, 0, 0, 0, t.Location).Add(time.Nanosecond * -1))
 	return &Season{
-		Begins: begins,
-		Ends:   ends,
-		Term:   term}
+		Begins:     begins,
+		Ends:       ends,
+		Hemisphere: term.Hemisphere,
+		Months:     term.Months,
+		Name:       term.Name}
 }

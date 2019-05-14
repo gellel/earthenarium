@@ -5,7 +5,7 @@ import (
 )
 
 // NewTime instantiates a new Time pointer.
-func NewTime(time *time.Time) *Time {
+func NewTime(time time.Time) *Time {
 	return &Time{
 		Day:        NewDay(time.Day(), time.YearDay(), time.Weekday()),
 		Hour:       time.Hour(),
@@ -43,5 +43,5 @@ func NewTimeLocal(timestamp, zone, city string) *Time {
 	}
 	year, month, day, hour, minute, second, nanosecond := t.Parse()
 	local := time.Date(year, time.Month(month), day, hour, minute, second, nanosecond, location)
-	return NewTime(&local)
+	return NewTime(local)
 }

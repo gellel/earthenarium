@@ -9,7 +9,8 @@ const (
 )
 
 const (
-	Meter float32 = 1
+	Kilometer float32 = 0.001
+	Meter     float32 = 1
 )
 
 const (

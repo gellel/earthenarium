@@ -7,7 +7,7 @@ func NewTimespan(begins, ends *Time) *Timespan {
 	if ok := begins.Unix < ends.Unix; !ok {
 		panic(fmt.Errorf("%v > %v", begins.Unix, ends.Unix))
 	}
-	seconds := ends.Literal.Sub(*begins.Literal).Seconds()
+	seconds := ends.Literal.Sub(begins.Literal).Seconds()
 	minutes := (seconds / 60)
 	hours := (minutes / 60)
 	days := (hours / 24)

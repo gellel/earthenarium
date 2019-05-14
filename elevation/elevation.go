@@ -28,6 +28,10 @@ func (elevation *Elevation) From(l *Elevation) *Elevation {
 	return NewElevation(l.Value() - elevation.Value())
 }
 
+func (elevation *Elevation) Kilometers() *Elevation {
+	return NewElevation(elevation.Value() * Kilometer)
+}
+
 // Max returns a new Elevation pointer containing the largest sum of the two Elevations.
 func (elevation *Elevation) Max(l *Elevation) *Elevation {
 	return NewElevation(float32(math.Max(math.Abs(float64(*elevation)), math.Abs(float64(*l)))))

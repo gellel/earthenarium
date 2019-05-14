@@ -5,7 +5,9 @@ import (
 )
 
 type Season struct {
-	Begins *chronograph.Time
-	Ends   *chronograph.Time
-	Term   *Term
+	Begins     *chronograph.Time
+	Ends       *chronograph.Time
+	Hemisphere string
+	Months     *Months
+	Name       string
 }
