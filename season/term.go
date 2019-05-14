@@ -1,6 +1,7 @@
 package season
 
 type Term struct {
-	Months *Months
-	Name   string
+	Hemisphere string
+	Months     *Months
+	Name       string
 }

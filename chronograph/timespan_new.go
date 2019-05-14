@@ -12,7 +12,7 @@ func NewTimespan(begins, ends *Time) *Timespan {
 	hours := (minutes / 60)
 	days := (hours / 24)
 	months := (ends.Month.Number - begins.Month.Number)
-	years := (ends.Year - begins.Year)
+	years := (ends.Year.Number - begins.Year.Number)
 	return &Timespan{
 		Days:    int(days),
 		Hours:   int(hours),

@@ -5,8 +5,22 @@ import (
 )
 
 // NewTime instantiates a new Time pointer.
-// NewTime takes an input of three time components to generate a localized timestamp.
-func NewTime(timestamp, zone, city string) *Time {
+func NewTime(time *time.Time) *Time {
+	return &Time{
+		Day:        NewDay(time.Day(), time.YearDay(), time.Weekday()),
+		Hour:       time.Hour(),
+		Location:   time.Location(),
+		Minute:     time.Minute(),
+		Month:      NewMonth(time.Month()),
+		Nanosecond: time.Nanosecond(),
+		Second:     time.Second(),
+		Literal:    time,
+		Unix:       time.Unix(),
+		Year:       NewYear(time.Year())}
+}
+
+// NewTimeLocal takes an input of three time components to generate a localized timestamp.
+func NewTimeLocal(timestamp, zone, city string) *Time {
 	t := NewTimestamp(timestamp)
 	if ok := t.Correct(); !ok {
 		panic(t.Error())
@@ -29,15 +43,5 @@ func NewTime(timestamp, zone, city string) *Time {
 	}
 	year, month, day, hour, minute, second, nanosecond := t.Parse()
 	local := time.Date(year, time.Month(month), day, hour, minute, second, nanosecond, location)
-	return &Time{
-		Day:        NewDay(local.Day(), local.YearDay(), local.Weekday()),
-		Hour:       local.Hour(),
-		Location:   location,
-		Minute:     local.Minute(),
-		Month:      NewMonth(local.Month()),
-		Nanosecond: local.Nanosecond(),
-		Second:     local.Second(),
-		Literal:    &local,
-		Unix:       local.Unix(),
-		Year:       local.Year()}
+	return NewTime(&local)
 }

@@ -1,8 +1,6 @@
 package hemisphere
 
 import (
-	"fmt"
-
 	"github.com/gellel/earthenarium/latitude"
 )
 
@@ -40,12 +38,12 @@ func NewLatitude(latitude *latitude.Latitude) *Latitude {
 		return &Latitude{
 			Area:      &Equator,
 			Name:      equatorLabel,
-			Reference: fmt.Sprintf("%s north", equatorLabel),
+			Reference: northLabel,
 			Y:         1}
 	}
 	return &Latitude{
 		Area:      &Equator,
 		Name:      equatorLabel,
-		Reference: fmt.Sprintf("%s south", equatorLabel),
+		Reference: southLabel,
 		Y:         -1}
 }

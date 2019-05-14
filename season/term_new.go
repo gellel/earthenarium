@@ -1,7 +1,8 @@
 package season
 
-func NewTerm(name string, months *Months) *Term {
+func NewTerm(hemisphere, name string, months *Months) *Term {
 	return &Term{
-		Months: months,
-		Name:   name}
+		Hemisphere: hemisphere,
+		Months:     months,
+		Name:       name}
 }

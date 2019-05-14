@@ -12,5 +12,5 @@ type Time struct {
 	Second     int
 	Literal    *time.Time
 	Unix       int64
-	Year       int
+	Year       *Year
 }

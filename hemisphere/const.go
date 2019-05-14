@@ -54,3 +54,10 @@ const (
 	cancerLabel    = "tropic of cancer"
 	capricornLabel = "tropic of capricorn"
 )
+
+const (
+	N string = northLabel
+	E string = eastLabel
+	S string = southLabel
+	W string = westLabel
+)

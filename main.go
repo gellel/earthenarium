@@ -10,9 +10,11 @@ import (
 
 func main() {
 
-	t := chronograph.NewTime("2019-01-01T01:10:00.000Z", "australia", "sydney")
+	t := chronograph.NewTimeLocal("2016-04-01T01:10:00.000Z", "australia", "sydney")
 
 	g := gps.Random()
 
-	fmt.Println(season.NewSeason(t, g.Hemisphere).Term)
+	fmt.Println(t.Year.Leap)
+
+	fmt.Println(season.NewSeason(t, g.Hemisphere).Ends)
 }
