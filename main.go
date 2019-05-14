@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 
-	"github.com/gellel/earthenarium/climate"
-
 	"github.com/gellel/earthenarium/chronograph"
 	"github.com/gellel/earthenarium/hemisphere"
 	"github.com/gellel/earthenarium/latitude"
@@ -31,5 +29,6 @@ func main() {
 		fmt.Println(i)
 	}
 
-	fmt.Println(climate.Arctic)
+	fmt.Println(hemisphere.Latitude.Area.Lat(latitude))
+
 }
