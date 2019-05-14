@@ -1,6 +1,6 @@
 package hemisphere
 
 type Hemisphere struct {
-	Latitude   Latitude
-	Longtitude Longtitude
+	Latitude   *Latitude
+	Longtitude *Longtitude
 }

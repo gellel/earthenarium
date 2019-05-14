@@ -10,7 +10,7 @@ type Time struct {
 	Month      *Month
 	Nanosecond int
 	Second     int
-	Time       *time.Time
+	Literal    *time.Time
 	Unix       int64
 	Year       int
 }

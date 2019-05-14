@@ -37,7 +37,7 @@ func NewTime(timestamp, zone, city string) *Time {
 		Month:      NewMonth(local.Month()),
 		Nanosecond: local.Nanosecond(),
 		Second:     local.Second(),
-		Time:       &local,
+		Literal:    &local,
 		Unix:       local.Unix(),
 		Year:       local.Year()}
 }

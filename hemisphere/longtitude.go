@@ -1,7 +1,8 @@
 package hemisphere
 
 type Longtitude struct {
-	Area      Area
+	Area      *Area
 	Name      string
 	Reference string
+	X         int
 }

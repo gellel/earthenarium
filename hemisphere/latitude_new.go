@@ -6,22 +6,46 @@ import (
 	"github.com/gellel/earthenarium/latitude"
 )
 
-func NewLatitude(latitude *latitude.Latitude) Latitude {
+func NewLatitude(latitude *latitude.Latitude) *Latitude {
 	l := latitude.Value()
 	if l >= arctic && l <= north {
-		return Latitude{Arctic, arcticLabel, northLabel}
+		return &Latitude{
+			Area:      &Arctic,
+			Name:      arcticLabel,
+			Reference: northLabel,
+			Y:         1}
 	}
 	if l >= cancer && l < arctic {
-		return Latitude{Cancer, cancerLabel, northLabel}
+		return &Latitude{
+			Area:      &Cancer,
+			Name:      cancerLabel,
+			Reference: northLabel,
+			Y:         1}
 	}
 	if l <= capricorn && l > antarctic {
-		return Latitude{Capricorn, capricornLabel, southLabel}
+		return &Latitude{
+			Area:      &Capricorn,
+			Name:      capricornLabel,
+			Reference: southLabel,
+			Y:         -1}
 	}
 	if l <= antarctic && l >= south {
-		return Latitude{Antarctic, antarcticLabel, southLabel}
+		return &Latitude{
+			Area:      &Antarctic,
+			Name:      antarcticLabel,
+			Reference: southLabel,
+			Y:         -1}
 	}
 	if l > equator {
-		return Latitude{Equator, equatorLabel, fmt.Sprintf("%s north", equatorLabel)}
+		return &Latitude{
+			Area:      &Equator,
+			Name:      equatorLabel,
+			Reference: fmt.Sprintf("%s north", equatorLabel),
+			Y:         1}
 	}
-	return Latitude{Equator, equatorLabel, fmt.Sprintf("%s south", equatorLabel)}
+	return &Latitude{
+		Area:      &Equator,
+		Name:      equatorLabel,
+		Reference: fmt.Sprintf("%s south", equatorLabel),
+		Y:         -1}
 }

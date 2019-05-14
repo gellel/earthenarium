@@ -11,3 +11,11 @@ const (
 	Fahrenheit float32 = 32.0
 	Kelvin     float32 = 273.15
 )
+
+const (
+	Decline float32 = 6.5
+)
+
+const (
+	Measurement string = C
+)

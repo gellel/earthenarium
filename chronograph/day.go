@@ -6,7 +6,7 @@ import (
 )
 
 type Day struct {
-	Day      time.Weekday
+	Literal  time.Weekday
 	Name     string
 	Number   int
 	Position int

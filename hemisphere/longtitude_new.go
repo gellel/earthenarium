@@ -6,16 +6,32 @@ import (
 	"github.com/gellel/earthenarium/longtitude"
 )
 
-func NewLongtitude(longtitude *longtitude.Longtitude) Longtitude {
+func NewLongtitude(longtitude *longtitude.Longtitude) *Longtitude {
 	l := longtitude.Value()
 	if l > prime && l <= east {
-		return Longtitude{East, eastLabel, eastLabel}
+		return &Longtitude{
+			Area:      &East,
+			Name:      eastLabel,
+			Reference: eastLabel,
+			X:         1}
 	}
 	if l < prime && l >= west {
-		return Longtitude{West, westLabel, westLabel}
+		return &Longtitude{
+			Area:      &West,
+			Name:      westLabel,
+			Reference: westLabel,
+			X:         -1}
 	}
 	if l > prime {
-		return Longtitude{Prime, primeLabel, fmt.Sprintf("%s east", primeLabel)}
+		return &Longtitude{
+			Area:      &Prime,
+			Name:      primeLabel,
+			Reference: fmt.Sprintf("%s east", primeLabel),
+			X:         1}
 	}
-	return Longtitude{Prime, primeLabel, fmt.Sprintf("%s west", primeLabel)}
+	return &Longtitude{
+		Area:      &Prime,
+		Name:      primeLabel,
+		Reference: fmt.Sprintf("%s west", primeLabel),
+		X:         -1}
 }
