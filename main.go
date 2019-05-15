@@ -2,7 +2,12 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"os"
+	"strings"
+	"text/tabwriter"
 
+	"github.com/gellel/earthenarium/air"
 	"github.com/gellel/earthenarium/elevation"
 
 	"github.com/gellel/earthenarium/chronograph"
@@ -16,15 +21,17 @@ import (
 
 func main() {
 
-	time := chronograph.NewTimeLocal("2016-11-01T01:10:00.000Z", "europe", "moscow")
+	city := "sydney"
 
-	latitudeSeed := latitude.NewLatitude(-89.86)
+	time := chronograph.NewTimeLocal("2016-11-01T01:10:00.000Z", "australia", city)
+
+	latitudeSeed := latitude.NewLatitude(-33.86)
 
 	longtitudeSeed := longtitude.NewLongtitude(151.21)
 
 	hemisphereSeed := hemisphere.NewHemisphere(latitudeSeed, longtitudeSeed)
 
-	elevationSeed := elevation.NewElevation(89)
+	elevationSeed := elevation.NewElevation(39)
 
 	seasonSeed := season.NewSeason(time, hemisphereSeed)
 
@@ -44,7 +51,50 @@ func main() {
 
 	temperatureAverage := (temperatureRange.Average() + (*temperatureRange)[time.Day.Number].Value()) / 2
 
-	temperatureSeed := temperature.NewTemperature(temperatureAverage).Elevation(elevationSeed).Time(time)
+	temperatureSeed := temperature.NewTemperature(temperatureAverage).Elevation(elevationSeed) //.Time(time)
 
-	fmt.Println(temperatureSeed)
+	pressureSeed := air.NewPressure(temperatureSeed, elevationSeed)
+
+	hpa := pressureSeed.Hpa()
+
+	var max, min float32
+
+	switch hemisphereSeed.Latitude.Name {
+	case hemisphere.CapricornLabel, hemisphere.CancerLabel:
+		max, min = 40, 70
+	case hemisphere.EquatorLabel:
+		max, min = 40, 89
+	case hemisphere.AntarcticLabel, hemisphere.ArcticLabel:
+		max, min = 20, 60
+	}
+
+	humidty := min + rand.Float32()*(max-min)
+
+	condition := "Sunny"
+
+	if humidty > 60 {
+		if temperatureSeed.Value() > 0 {
+			condition = "Rain"
+		} else {
+			condition = "Snow"
+		}
+	}
+
+	localtime := fmt.Sprintf("%v-%v-%v %v:%v:%v", time.Year.Number, time.Month.Number, time.Day.Number, time.Hour, time.Minute, time.Second)
+
+	latlongele := fmt.Sprintf("%v,%v,%v", latitudeSeed.Value(), longtitudeSeed.Value(), elevationSeed.Value())
+
+	h := fmt.Sprintf("%.1f", humidty)
+
+	template := fmt.Sprintf("%s\t%s\t%s\t%s\t%s\t%v\t%s", strings.Title(city), latlongele, localtime, condition, temperatureSeed.String(), hpa, h)
+
+	w := new(tabwriter.Writer)
+
+	// Format in tab-separated columns with a tab stop of 8.
+	w.Init(os.Stdout, 0, 8, 2, '\t', 0)
+	fmt.Fprintln(w, "Location\tPosition\tLocal time\tCondition\tTemperature\tPressure\tHumidity")
+	fmt.Fprintln(w, template)
+	fmt.Fprintln(w)
+	w.Flush()
+
 }

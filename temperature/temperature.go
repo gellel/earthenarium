@@ -29,7 +29,11 @@ func (temperature *Temperature) Set(t float32) *Temperature {
 }
 
 func (temperature *Temperature) String() string {
-	return fmt.Sprintf("%v", temperature.Value())
+	v := temperature.Value()
+	if v > 0 {
+		return fmt.Sprintf("+%.1f", v)
+	}
+	return fmt.Sprintf("%.1f", v)
 }
 
 func (temperature *Temperature) Time(t *chronograph.Time) *Temperature {

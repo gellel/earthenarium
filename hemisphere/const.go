@@ -35,39 +35,39 @@ const (
 )
 
 const (
-	northLabel string = "northern hemisphere"
-	southLabel string = "southern hemisphere"
+	NorthLabel string = "northern hemisphere"
+	SouthLabel string = "southern hemisphere"
 )
 
 const (
-	eastLabel string = "eastern hemisphere"
-	westLabel string = "western hemisphere"
+	EastLabel string = "eastern hemisphere"
+	WestLabel string = "western hemisphere"
 )
 
 const (
-	equatorLabel string = "equator"
-	primeLabel   string = "prime meridian"
+	EquatorLabel string = "equator"
+	PrimeLabel   string = "prime meridian"
 )
 
 const (
-	antarcticLabel string = "antarctic circle"
-	arcticLabel    string = "arctic circle"
+	AntarcticLabel string = "antarctic circle"
+	ArcticLabel    string = "arctic circle"
 )
 
 const (
-	cancerLabel    string = "tropic of cancer"
-	capricornLabel string = "tropic of capricorn"
+	CancerLabel    string = "tropic of cancer"
+	CapricornLabel string = "tropic of capricorn"
 )
 
 const (
-	N string = northLabel
+	N string = NorthLabel
 )
 const (
-	E string = eastLabel
+	E string = EastLabel
 )
 const (
-	S string = southLabel
+	S string = SouthLabel
 )
 const (
-	W string = westLabel
+	W string = WestLabel
 )

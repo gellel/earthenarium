@@ -9,41 +9,41 @@ func NewLatitude(latitude *latitude.Latitude) *Latitude {
 	if l >= arctic && l <= north {
 		return &Latitude{
 			Area:      &Arctic,
-			Name:      arcticLabel,
-			Reference: northLabel,
+			Name:      ArcticLabel,
+			Reference: NorthLabel,
 			Y:         1}
 	}
 	if l >= cancer && l < arctic {
 		return &Latitude{
 			Area:      &Cancer,
-			Name:      cancerLabel,
-			Reference: northLabel,
+			Name:      CancerLabel,
+			Reference: NorthLabel,
 			Y:         1}
 	}
 	if l <= capricorn && l > antarctic {
 		return &Latitude{
 			Area:      &Capricorn,
-			Name:      capricornLabel,
-			Reference: southLabel,
+			Name:      CapricornLabel,
+			Reference: SouthLabel,
 			Y:         -1}
 	}
 	if l <= antarctic && l >= south {
 		return &Latitude{
 			Area:      &Antarctic,
-			Name:      antarcticLabel,
-			Reference: southLabel,
+			Name:      AntarcticLabel,
+			Reference: SouthLabel,
 			Y:         -1}
 	}
 	if l > equator {
 		return &Latitude{
 			Area:      &Equator,
-			Name:      equatorLabel,
-			Reference: northLabel,
+			Name:      EquatorLabel,
+			Reference: NorthLabel,
 			Y:         1}
 	}
 	return &Latitude{
 		Area:      &Equator,
-		Name:      equatorLabel,
-		Reference: southLabel,
+		Name:      EquatorLabel,
+		Reference: SouthLabel,
 		Y:         -1}
 }

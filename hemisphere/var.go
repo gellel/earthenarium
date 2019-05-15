@@ -32,26 +32,26 @@ var (
 )
 var (
 	Center = &Zone{
-		equatorLabel: Equator,
-		primeLabel:   Prime}
+		EquatorLabel: Equator,
+		PrimeLabel:   Prime}
 )
 var (
 	Eastern = &Zone{
-		eastLabel: East}
+		EastLabel: East}
 )
 var (
 	Northern = &Zone{
-		arcticLabel: Arctic,
-		cancerLabel: Cancer}
+		ArcticLabel: Arctic,
+		CancerLabel: Cancer}
 )
 var (
 	Southern = &Zone{
-		antarcticLabel: Antarctic,
-		capricornLabel: Capricorn}
+		AntarcticLabel: Antarctic,
+		CapricornLabel: Capricorn}
 )
 var (
 	Western = &Zone{
-		westLabel: West}
+		WestLabel: West}
 )
 var (
 	Zones = (&Zone{}).Concat(
