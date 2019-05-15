@@ -3,6 +3,7 @@ package temperature
 import (
 	"fmt"
 
+	"github.com/gellel/earthenarium/chronograph"
 	"github.com/gellel/earthenarium/elevation"
 )
 
@@ -27,6 +28,14 @@ func (temperature *Temperature) Set(t float32) *Temperature {
 
 func (temperature *Temperature) String() string {
 	return fmt.Sprintf("%v", temperature.Value())
+}
+
+func (temperature *Temperature) Time(t *chronograph.Time) *Temperature {
+	v := temperature.Value()
+	if v > 0 {
+		return NewTemperature(v + 1.27 - 0.7/float32(t.Hour)*12*60)
+	}
+	return NewTemperature(v + 0.16 - 0.25/float32(t.Hour)*12*60)
 }
 
 func (temperature *Temperature) Value() float32 {

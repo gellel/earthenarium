@@ -19,3 +19,8 @@ func (area Area) Lat(latitude *latitude.Latitude) Coordinate {
 	}
 	return area[1]
 }
+
+func (area Area) Key() float32 {
+
+	return float32(area[0] + area[1] + area[2])
+}

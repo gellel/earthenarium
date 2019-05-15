@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 
+	"github.com/gellel/earthenarium/elevation"
+
 	"github.com/gellel/earthenarium/chronograph"
+	"github.com/gellel/earthenarium/climate"
 	"github.com/gellel/earthenarium/hemisphere"
 	"github.com/gellel/earthenarium/latitude"
 	"github.com/gellel/earthenarium/longtitude"
@@ -13,22 +16,35 @@ import (
 
 func main() {
 
-	time := chronograph.NewTimeLocal("2016-04-01T01:10:00.000Z", "europe", "moscow")
+	time := chronograph.NewTimeLocal("2016-01-01T01:10:00.000Z", "europe", "moscow")
 
-	latitude := latitude.NewLatitude(-33.86)
+	latitudeSeed := latitude.NewLatitude(-33.86)
 
-	longtitude := longtitude.NewLongtitude(151.21)
+	longtitudeSeed := longtitude.NewLongtitude(151.21)
 
-	hemisphere := hemisphere.NewHemisphere(latitude, longtitude)
+	hemisphereSeed := hemisphere.NewHemisphere(latitudeSeed, longtitudeSeed)
 
-	season := season.NewSeason(time, hemisphere)
+	elevationSeed := elevation.NewElevation(89)
 
-	s := chronograph.NewTimespan(time, season.Ends)
+	seasonSeed := season.NewSeason(time, hemisphereSeed)
 
-	for _, i := range *temperature.NewTemperatures(25, 0.25, s.Days) {
-		fmt.Println(i)
-	}
+	timeSpan := chronograph.NewTimespan(time, seasonSeed.Ends)
 
-	fmt.Println(hemisphere.Latitude.Area.Lat(latitude))
+	key := hemisphereSeed.Latitude.Area.Key()
 
+	coordinate := hemisphereSeed.Latitude.Area.Lat(latitudeSeed)
+
+	climateSeed := climate.Zones.Fetch(key)
+
+	climateSeasons := climateSeed.Fetch(coordinate)
+
+	seasonalTemperature := climateSeasons.Fetch(seasonSeed.Name)
+
+	temperatureRange := temperature.NewTemperatures(seasonalTemperature, 5.25023, timeSpan.Days)
+
+	temperatureAverage := (temperatureRange.Average() + (*temperatureRange)[time.Day.Number].Value()) / 2
+
+	temperatureSeed := temperature.NewTemperature(temperatureAverage)
+
+	fmt.Println(temperatureSeed.Elevation(elevationSeed))
 }

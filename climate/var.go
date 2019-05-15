@@ -111,3 +111,11 @@ var (
 			season.Summer: -10,
 			season.Autumn: -7}}
 )
+var (
+	Zones = Zone{
+		hemisphere.Arctic.Key():    Arctic,
+		hemisphere.Cancer.Key():    Cancer,
+		hemisphere.Equator.Key():   Equator,
+		hemisphere.Capricorn.Key(): Capricorn,
+		hemisphere.Antarctic.Key(): Antarctic}
+)
