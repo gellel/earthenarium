@@ -1,7 +1,9 @@
 # earthenarium
 
-## Usage
+## Binary
 `go get github.com/gellel/earthenarium`
+## Source
+`git clone github.com/gellel/earthenarium`
 
 ### example 
 `$ earthenarium`
@@ -27,3 +29,8 @@ Relative humidity is a %.
 Season is the sampling season collected from the generated timestamp.
 Region is the temperate band of the planet.
 Hemisphere is the positional reference.
+
+#### Calculations
+Temperatures are generate using a pseudo randomised normal distribution, taking the defined minimum and maximum bounds for a hemisphere and season. Each temperate range is build upon the span of days between the season starting time and season ending time, averaging out the temperature range across the month.
+Humidity is generated from a random unix seed, with the minimum and maximum bounds being adjusted using the hemispheric bounds maximum and minimum ranges to scale desired change for higher or lower pressures.
+Pressure is computed using an expanded barometric formula, modifying the potential minimum and maximum bounds based on the argument elevation and argument temperature to construct a pseudo accurate representation of the pressure range for a given condition.
