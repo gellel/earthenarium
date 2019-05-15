@@ -38,9 +38,9 @@ Latitudes are given in degrees, using positive and negative floating point numbe
 ###### Longtitude
 Longtitude are also given in degrees, using positive and negative floating point numbers to indicate East (+) or West(-) across the globe. A supported longtitude for the program can only exist within the defined boundaries of +180/-180. Each *Longtitude* is a unique data structure that allows its relative position to and from other longtitudes across the Earth to be deduced. For future iterations, this would allow the program to intelligently modify climate conditions based on percieved proximity to important geological entities.
 ###### Elevation
-Elevations are calculated in meters and are always non-signed integers. For a valid elevation to exist in the context of this program, a floating point number must be created within the defined boundaries of 8848-0. These measurements are used to indicate sea-floor(0m) or Everest(8848m).
+Elevations are calculated in meters and are always non-signed integers. For a valid elevation to exist in the context of this program, a floating point number must be created within the defined boundaries of 8848-0. These measurements are used to indicate sea-floor(0m) or Everest(8848m). Like Longtitude or Latitude pointers, Elevation addresses also have the ability to calculate proximities, allowing for a series of elevation points to be potentally used to normalise areas of varying topography (ie, Hong Kong).
 ###### Temperature
-Temperatures are not clamped to specific ranges due to requirements to potentially throw a number out of bounds for a specific calculation.
+Temperatures are not clamped to specific ranges due to requirements to potentially throw a number out of bounds for a specific calculation. Temperature pointers, to aid in the calculation of other systems can be cast to all modern forms of temperature units, such as Kelvin, Fahrenheit and are default in Celcius.
 
 
 ## Calculations
