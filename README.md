@@ -32,13 +32,15 @@ Season is the sampling season collected from the generated timestamp.
 Region is the temperate band of the planet.
 Hemisphere is the positional reference.
 
-#### Measurments
+#### Measurements
 ###### Latitude
 Latitudes are given in degrees, using positive and negative floating point numbers to indicate North (+) or South(-) across the globe. A supported latitude for the program can only exist within the defined boundaries of +90/-90. Each *Latitude* is a unique data structure that allows its relative position to and from other latitudes across the Earth to be deduced. For future iterations, this would allow the program to intelligently modify climate conditions based on percieved proximity to important geological entities.
 ###### Longtitude
 Longtitude are also given in degrees, using positive and negative floating point numbers to indicate East (+) or West(-) across the globe. A supported longtitude for the program can only exist within the defined boundaries of +180/-180. Each *Longtitude* is a unique data structure that allows its relative position to and from other longtitudes across the Earth to be deduced. For future iterations, this would allow the program to intelligently modify climate conditions based on percieved proximity to important geological entities.
 ###### Elevation
 Elevations are calculated in meters and are always non-signed integers. For a valid elevation to exist in the context of this program, a floating point number must be created within the defined boundaries of 8848-0. These measurements are used to indicate sea-floor(0m) or Everest(8848m).
+###### Temperature
+Temperatures are not clamped to specific ranges due to requirements to potentially throw a number out of bounds for a specific calculation.
 
 --
 #### Calculations
