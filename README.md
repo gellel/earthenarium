@@ -32,6 +32,10 @@ Season is the sampling season collected from the generated timestamp.
 Region is the temperate band of the planet.
 Hemisphere is the positional reference.
 
+## Support
+###### Locations
+Locations that can be calculated are based on their availability within the Timezone database. These can be found at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones. For the purposes of this implementation, main.go runs a series of predifined locations but can accept any valid location.
+
 ## Measurements
 ###### Latitude
 Latitudes are given in degrees, using positive and negative floating point numbers to indicate North (+) or South(-) across the globe. A supported latitude for the program can only exist within the defined boundaries of +90/-90. Each *Latitude* is a unique data structure that allows its relative position to and from other latitudes across the Earth to be deduced. For future iterations, this would allow the program to intelligently modify climate conditions based on percieved proximity to important geological entities.
