@@ -9,6 +9,6 @@ Earthernarium is a small weather program intended to generate generalised climat
 #### Output
 Running the program produces a tablised set of data, containing the following
 
-| Location | Position             | Local Time       | Condition | Temperature | Pressure   | Humidity | Season | Region           |
+| Location | Position             | Local Time       | Condition | Temperature | Pressure   | Humidity | Season | Region           | Hemisphere |
 |----------|----------------------|------------------|-----------|-------------|------------|----------|--------|------------------|
-| El Aauin | 27.1418,-13.18797,68 | 1903-3-24 0:10:0 | Sunny     | +11.0       | 1005.10767 | 58.1     | Spring | Tropic of Cancer |
+| El Aauin | 27.1418,-13.18797,68 | 1903-3-24 0:10:0 | Sunny     | +11.0       | 1005.10767 | 58.1     | Spring | Tropic of Cancer | Northern |
