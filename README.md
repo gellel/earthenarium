@@ -11,6 +11,8 @@
 ### About 
 Earthernarium is a small weather program intended to generate generalised climate seeds based on proximities to notable geographic ranges across a pseudo-earth planet. It uses a set of defined boundaries (Arctic Circle, Tropic of Cancer, Equator, Tropic of Capricorn, Antarctic Circle) to construct a normal distribution of random numbers to simulate the number of variable conditions for a seasonal range. Climates gradually shift from colder to warmer as the longtitudal reference slides closer towards the globes center band (minimum bounds Tropic of Cancer and maximum bounds Tropic of Capricon). 
 
+![screenshot](https://raw.githubusercontent.com/gellel/earthenarium/master/capture.PNG)
+
 #### Output
 Running the program produces a tablised set of data, containing the following
 
