@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
 	"text/tabwriter"
+	"time"
 
 	"github.com/gellel/earthenarium/air"
 	"github.com/gellel/earthenarium/chronograph"
@@ -35,7 +37,7 @@ func main() {
 	titles := "Location\tPosition\tLocal time\tCondition\tTemperature\tPressure\tHumidity\tSeason\tRegion\tHemisphere"
 	fmt.Fprintln(w, titles)
 
-	m := mapset{
+	set := mapset{
 		1: area{
 			zone:       "australia",
 			city:       "sydney",
@@ -77,11 +79,43 @@ func main() {
 			city:       "hong kong",
 			latitude:   22.3193,
 			longtitude: 114.1694,
-			elevation:  13.5}}
+			elevation:  13.5},
+		8: area{
+			zone:       "asia",
+			city:       "kathmandu",
+			latitude:   27.7172,
+			longtitude: 85.3240,
+			elevation:  1400},
+		9: area{
+			zone:       "africa",
+			city:       "El aaiun",
+			latitude:   27.1418,
+			longtitude: -13.18797,
+			elevation:  68}}
 
-	for _, x := range m {
+	now := time.Now()
 
-		t := chronograph.NewTimeLocal("2016-11-01T01:10:00.000Z", x.zone, x.city)
+	rand.Seed(now.UnixNano())
+
+	year := rand.Intn(now.Year()-1899) + 1899
+	month := rand.Intn(12-1) + 1
+	day := rand.Intn(28-1) + 1
+
+	m := fmt.Sprintf("%v", month)
+	d := fmt.Sprintf("%v", day)
+
+	if day < 10 {
+		d = fmt.Sprintf("0%s", d)
+	}
+	if month < 10 {
+		m = fmt.Sprintf("0%s", m)
+	}
+
+	timestamp := fmt.Sprintf("%v-%s-%sT00:10:00.000Z", year, m, d)
+
+	for _, x := range set {
+
+		t := chronograph.NewTimeLocal(timestamp, x.zone, x.city)
 
 		latitudeSeed := latitude.NewLatitude(x.latitude)
 
