@@ -62,7 +62,7 @@ var (
 			season.Summer: 35,
 			season.Autumn: 29},
 		// lower-equator
-		hemisphere.Equator[0]: {
+		hemisphere.Equator[2]: {
 			season.Winter: 23,
 			season.Spring: 26,
 			season.Summer: 29,
