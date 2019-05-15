@@ -22,9 +22,9 @@ Running the program produces a tablised set of data, containing the following
 
 #### Table contents
 Location is city where the measurement is conducted.
-Position is a comma-separated triple containing latitude, longitude, and elevation in metres above sea level,
+Position is a comma-separated triple containing latitude, longitude, and elevation in metres above sea level.
 Local time is an ISO8601 date time,
-Conditions is either Snow, Rain, Sunny.
+Conditions are either Snow, Rain or Sunny. 
 Temperature is in °C.
 Pressure is in hPa
 Relative humidity is a %.
@@ -34,6 +34,8 @@ Hemisphere is the positional reference.
 
 #### Calculations
 ###### Temperatures
-Temperatures are generated from a pseudo random normalised distribution. For a temperature to be generated, the program selects the appropriate climate conditions based on hemispheric and chronographic data. From these data points, the program generates a variying range of temperates for *n* number of days that are appropriate to the selected hemisphere and geographic band. To populate *n*, the program uses the in memory chronograph.Time current day as the lower bounds to calculate the required set of distrubtions remaining until the end of the season. After the calculation averaging out the temperature range across the month.
-Humidity is generated from a random unix seed, with the minimum and maximum bounds being adjusted using the hemispheric bounds maximum and minimum ranges to scale desired change for higher or lower pressures.
-Pressure is computed using an expanded barometric formula, modifying the potential minimum and maximum bounds based on the argument elevation and argument temperature to construct a pseudo accurate representation of the pressure range for a given condition.
+Temperatures are generated from a pseudo random normalised distribution. For a temperature to be generated, the program selects the appropriate climate conditions based on hemispheric and chronologic data. From these data points, the program generates a variying range of temperates for *n* number of days (that are appropriate to the selected hemisphere and geographic band). To populate *n*, the program uses the in memory chronograph.Time.Day as the lower bounds to calculate the required set of distrubtions needed to populate the number of required days for the season (which has been selected dynamically based on regional conditions). Once these numbers are in place, the program averages the temperatures across the month to produce the anticipated temperature for the current date.
+###### Humidity
+Humidity is generated from a random unix seed, with the minimum and maximum bounds being adjusted using the hemispheric bounds maximum and minimum ranges to scale desired change for higher or lower pressures. Bands that exist in closer proximity to the edge of the Tropic of Cancer or Tropic of Capricon, the rise in expected humidity is reflected in the possible range of numbers that can be generated.
+###### Pressure.
+Pressure is computed using an expanded barometric formula. This formula takes into account elevations and temperatures, relative to their atmopsheric pressure bands, modifying the potential minimum and maximum bounds used in the final calculation. Based on the argument elevation and argument temperature, pressure systems will fluctuate to produce a pseudo accurate representation of the pressure range for a given set of conditions, leaning towards lower pressure systems for higher altitudes.
