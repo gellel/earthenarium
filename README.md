@@ -1,7 +1,9 @@
 # earthenarium
 
-## Usage
+## Binary
 `go get github.com/gellel/earthenarium`
+## Source
+`git clone github.com/gellel/earthenarium`
 
 ### example 
 `$ earthenarium`
