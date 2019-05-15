@@ -13,14 +13,14 @@ Earthernarium is a small weather program intended to generate generalised climat
 
 ![screenshot](https://raw.githubusercontent.com/gellel/earthenarium/master/capture.PNG)
 
-#### Output
+## Output
 Running the program produces a tablised set of data, containing the following
 
 | Location | Position | Local Time | Condition | Temperature | Pressure | Humidity | Season | Region | Hemisphere |
 |----------|----------|------------|-----------|-------------|----------|----------|--------|--------|------------|
 | El Aauin | 27.1418,-13.18797,68 | 1903-3-24 0:10:0 | Sunny | +11.0 | 1005.10767 | 58.1 | Spring | Tropic of Cancer | Northern |
 
-#### Table contents
+#### Generated table contents
 Location is city where the measurement is conducted.
 Position is a comma-separated triple containing latitude, longitude, and elevation in metres above sea level.
 Local time is an ISO8601 date time,
@@ -32,7 +32,7 @@ Season is the sampling season collected from the generated timestamp.
 Region is the temperate band of the planet.
 Hemisphere is the positional reference.
 
-#### Measurements
+## Measurements
 ###### Latitude
 Latitudes are given in degrees, using positive and negative floating point numbers to indicate North (+) or South(-) across the globe. A supported latitude for the program can only exist within the defined boundaries of +90/-90. Each *Latitude* is a unique data structure that allows its relative position to and from other latitudes across the Earth to be deduced. For future iterations, this would allow the program to intelligently modify climate conditions based on percieved proximity to important geological entities.
 ###### Longtitude
@@ -42,8 +42,8 @@ Elevations are calculated in meters and are always non-signed integers. For a va
 ###### Temperature
 Temperatures are not clamped to specific ranges due to requirements to potentially throw a number out of bounds for a specific calculation.
 
---
-#### Calculations
+
+## Calculations
 ###### Hemispheres
 Hemispheres are generated from valid Latitude and Longtitude pointers which have been sanitised by the program. These measurements are then checked against the defined geographic boundaries and then are clamped to the approximate range the latitude and longtitude most accurately falls within. For simplicity, subsets and supersets of geographic hemispheres (such as *Tropic of Cancer, Sub-Tropical*, *Tropic of Cancer, Temperate-Arid*) are not factored into clipping to avoid large conditional checks for temperature and climate conditions, relying on approximates to satisfy the simulation output.
 ###### Seasons
