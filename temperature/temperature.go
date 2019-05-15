@@ -2,6 +2,8 @@ package temperature
 
 import (
 	"fmt"
+	"math"
+	"time"
 
 	"github.com/gellel/earthenarium/chronograph"
 	"github.com/gellel/earthenarium/elevation"
@@ -31,11 +33,18 @@ func (temperature *Temperature) String() string {
 }
 
 func (temperature *Temperature) Time(t *chronograph.Time) *Temperature {
-	v := temperature.Value()
-	if v > 0 {
-		return NewTemperature(v + 1.27 - 0.7/float32(t.Hour)*12*60)
+	v := float64(*temperature)
+	max := v * 1.2
+	min := v * 0.7
+	if v < 0 {
+		min, max = max, min
 	}
-	return NewTemperature(v + 0.16 - 0.25/float32(t.Hour)*12*60)
+	start := chronograph.NewTime(time.Date(t.Year.Number, t.Month.Literal, t.Day.Number, 0, 0, 0, 0, t.Location))
+	span := chronograph.NewTimespan(start, t)
+	minutes := float64(span.Minutes)
+	celcius := math.Abs((max - min) / (12 * 60))
+	n := max - ((12*60)-minutes)*(celcius)
+	return NewTemperature(float32(n))
 }
 
 func (temperature *Temperature) Value() float32 {

@@ -16,9 +16,9 @@ import (
 
 func main() {
 
-	time := chronograph.NewTimeLocal("2016-01-01T01:10:00.000Z", "europe", "moscow")
+	time := chronograph.NewTimeLocal("2016-11-01T01:10:00.000Z", "europe", "moscow")
 
-	latitudeSeed := latitude.NewLatitude(-33.86)
+	latitudeSeed := latitude.NewLatitude(-89.86)
 
 	longtitudeSeed := longtitude.NewLongtitude(151.21)
 
@@ -44,7 +44,7 @@ func main() {
 
 	temperatureAverage := (temperatureRange.Average() + (*temperatureRange)[time.Day.Number].Value()) / 2
 
-	temperatureSeed := temperature.NewTemperature(temperatureAverage)
+	temperatureSeed := temperature.NewTemperature(temperatureAverage).Elevation(elevationSeed).Time(time)
 
-	fmt.Println(temperatureSeed.Elevation(elevationSeed))
+	fmt.Println(temperatureSeed)
 }
