@@ -44,6 +44,8 @@ Temperatures are not clamped to specific ranges due to requirements to potential
 
 --
 #### Calculations
+###### Hemispheres
+Hemispheres are generated from valid Latitude and Longtitude pointers which have been sanitised by the program. These measurements are then checked against the defined geographic boundaries and then are clamped to the approximate range the latitude and longtitude most accurately falls within. For simplicity, subsets and supersets of geographic hemispheres (such as *Tropic of Cancer, Sub-Tropical*, *Tropic of Cancer, Temperate-Arid*) are not factored into clipping to avoid large conditional checks for temperature and climate conditions, relying on approximates to satisfy the simulation output.
 ###### Seasons
 Seasons are selected using quartile bounds, selected at runtime based on the argument chronograph.Time struct and hemipshere. This allows the program to dynamically fetch and generate timestamps for the appropriate seasonal range and climate, while factoring time appropriate conditions such as *leap years*, transitional timestamp boundaries (one year rolling over to the next) and whether or not the season system is inverted for the provided hemisphere. 
 ###### Temperatures
