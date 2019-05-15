@@ -100,18 +100,26 @@ func main() {
 	year := rand.Intn(now.Year()-1899) + 1899
 	month := rand.Intn(12-1) + 1
 	day := rand.Intn(28-1) + 1
-
+	hour := rand.Intn(24-1) + 1
+	minute := rand.Intn(60-0) + 0
+	min := fmt.Sprintf("%v", minute)
 	m := fmt.Sprintf("%v", month)
 	d := fmt.Sprintf("%v", day)
+	h := fmt.Sprintf("%v", hour)
 
+	if minute < 10 {
+		min = fmt.Sprintf("0%s", min)
+	}
+	if hour < 10 {
+		h = fmt.Sprintf("0%s", h)
+	}
 	if day < 10 {
 		d = fmt.Sprintf("0%s", d)
 	}
 	if month < 10 {
 		m = fmt.Sprintf("0%s", m)
 	}
-
-	timestamp := fmt.Sprintf("%v-%s-%sT00:10:00.000Z", year, m, d)
+	timestamp := fmt.Sprintf("%v-%s-%sT%s:%s:00.000Z", year, m, d, h, min)
 
 	for _, x := range set {
 
