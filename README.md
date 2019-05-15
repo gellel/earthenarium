@@ -33,6 +33,7 @@ Region is the temperate band of the planet.
 Hemisphere is the positional reference.
 
 #### Calculations
-Temperatures are generate using a pseudo randomised normal distribution, taking the defined minimum and maximum bounds for a hemisphere and season. Each temperate range is build upon the span of days between the season starting time and season ending time, averaging out the temperature range across the month.
+###### Temperatures
+Temperatures are generated from a pseudo random normalised distribution. For a temperature to be generated, the program selects the appropriate climate conditions based on hemispheric and chronographic data. From these data points, the program generates a variying range of temperates for *n* number of days that are appropriate to the selected hemisphere and geographic band. To populate *n*, the program uses the in memory chronograph.Time current day as the lower bounds to calculate the required set of distrubtions remaining until the end of the season. After the calculation averaging out the temperature range across the month.
 Humidity is generated from a random unix seed, with the minimum and maximum bounds being adjusted using the hemispheric bounds maximum and minimum ranges to scale desired change for higher or lower pressures.
 Pressure is computed using an expanded barometric formula, modifying the potential minimum and maximum bounds based on the argument elevation and argument temperature to construct a pseudo accurate representation of the pressure range for a given condition.
