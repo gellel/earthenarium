@@ -39,7 +39,11 @@ Latitudes are given in degrees, using positive and negative floating point numbe
 Longtitude are also given in degrees, using positive and negative floating point numbers to indicate East (+) or West(-) across the globe. A supported longtitude for the program can only exist within the defined boundaries of +180/-180. Each *Longtitude* is a unique data structure that allows its relative position to and from other longtitudes across the Earth to be deduced. For future iterations, this would allow the program to intelligently modify climate conditions based on percieved proximity to important geological entities.
 ###### Elevation
 Elevations are calculated in meters and are always non-signed integers. For a valid elevation to exist in the context of this program, a floating point number must be created within the defined boundaries of 8848-0. These measurements are used to indicate sea-floor(0m) or Everest(8848m).
+
+--
 #### Calculations
+###### Seasons
+Seasons are selected using quartile bounds, selected at runtime based on the argument chronograph.Time struct and hemipshere. This allows the program to dynamically fetch and generate timestamps for the appropriate seasonal range and climate, while factoring time appropriate conditions such as *leap years*, transitional timestamp boundaries (one year rolling over to the next) and whether or not the season system is inverted for the provided hemisphere. 
 ###### Temperatures
 Temperatures are generated from a pseudo random normalised distribution. For a temperature to be generated, the program selects the appropriate climate conditions based on hemispheric and chronologic data. From these data points, the program generates a variying range of temperates for *n* number of days (that are appropriate to the selected hemisphere and geographic band). To populate *n*, the program uses the in memory chronograph.Time.Day as the lower bounds to calculate the required set of distrubtions needed to populate the number of required days for the season (which has been selected dynamically based on regional conditions). Once these numbers are in place, the program averages the temperatures across the month to produce the anticipated temperature for the current date. 
 ###### Humidity
